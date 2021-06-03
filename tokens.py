@@ -7,7 +7,7 @@ from dataclasses import dataclass
 
 # Assign a number to each type of token
 class TokenType(Enum):
-    """Maps each token name to a number"""
+    """Maps each constant token name to a number"""
 
     NUMBER      = 0
     PLUS        = 1
@@ -25,10 +25,10 @@ class Token:
     __init__ and __repr__ etc.
     """
 
-    type: TokenType
+    type: TokenType # we are initilizing using fields, part of @dataclass
     value: any = None 
 
     def __repr__(self) -> str:
         # Print name+value if value exists
-        return self.type.name + (f":{self.value}" if self.value != None else "")
+        return self.type.name + (f":{self.value}" if self.value is not None else "")
 
