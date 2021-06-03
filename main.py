@@ -1,4 +1,8 @@
+from lexer import Lexer
 
 while True:
     text = input("calc >")
-    print(text)
+    lexer = Lexer(text)
+    tokens = lexer.generate_tokens()
+    print(list(tokens))
+
