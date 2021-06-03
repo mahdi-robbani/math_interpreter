@@ -1,8 +1,15 @@
-from tokens import Token, TokenType
+from tokens import Token
 
 # constants
 WHITESPACE = ' \t\n'
 DIGITS = '0123456789'
+TOKENT_TYPE_DICT = {"+" : "PLUS", 
+                    "-": "MINUS", 
+                    "*": "MULTIPLY", 
+                    "/" : "DIVIDE", 
+                    "(" : "LPAREN", 
+                    ")": "RPAREN"
+                    }
 
 class Lexer:
     """Class used for converting text to a list of tokens"""
@@ -36,27 +43,13 @@ class Lexer:
                 self.advance()
             elif self.current_char == "." or self.current_char in DIGITS:
                 yield self.generate_number()
-            elif self.current_char == "+":
-                yield Token(TokenType.PLUS)
-                self.advance()
-            elif self.current_char == "-":
-                yield Token(TokenType.MINUS)
-                self.advance()
-            elif self.current_char == "+":
-                yield Token(TokenType.MULTIPLY)
-                self.advance()
-            elif self.current_char == "*":
-                yield Token(TokenType.DIVIDE)
-                self.advance()
-            elif self.current_char == "(":
-                yield Token(TokenType.LPAREN)
-                self.advance()
-            elif self.current_char == ")":
-                yield Token(TokenType.RPAREN)
-                self.advance()
-            # ensure no illegal characters
             else:
-                raise Exception(f"Illegal Character: {self.current_char}")
+                try:
+                    token_type = TOKENT_TYPE_DICT[self.current_char]
+                    yield Token(token_type)
+                    self.advance()
+                except KeyError:
+                    raise Exception(f"Illegal Character: {self.current_char}")
 
     def generate_number(self):
         """Cycles through text and generates a Token object with type 
@@ -86,5 +79,5 @@ class Lexer:
         if number_str.endswith('.'):
             number_str += '0'
         
-        return Token(TokenType.NUMBER, float(number_str)) # consider changing
+        return Token("NUMBER", float(number_str))
 
