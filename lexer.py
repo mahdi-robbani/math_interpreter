@@ -31,29 +31,30 @@ class Lexer:
         """
 
         while self.current_char is not None:
+            # skips whitespaces
             if self.current_char in WHITESPACE: 
-                # skips whitespaces
                 self.advance()
             elif self.current_char == "." or self.current_char in DIGITS:
                 yield self.generate_number()
             elif self.current_char == "+":
-                self.advance()
                 yield Token(TokenType.PLUS)
+                self.advance()
             elif self.current_char == "-":
-                self.advance()
                 yield Token(TokenType.MINUS)
+                self.advance()
             elif self.current_char == "+":
-                self.advance()
                 yield Token(TokenType.MULTIPLY)
-            elif self.current_char == "*":
                 self.advance()
+            elif self.current_char == "*":
                 yield Token(TokenType.DIVIDE)
-            elif self.current_char == "/":
                 self.advance()
+            elif self.current_char == "(":
                 yield Token(TokenType.LPAREN)
-            elif self.current_char == "*":
                 self.advance()
+            elif self.current_char == ")":
                 yield Token(TokenType.RPAREN)
+                self.advance()
+            # ensure no illegal characters
             else:
                 raise Exception(f"Illegal Character: {self.current_char}")
 
