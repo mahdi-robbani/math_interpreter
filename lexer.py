@@ -13,7 +13,7 @@ class Lexer:
         """
 
         self.text = iter(text)
-        self.advance() #???
+        self.advance() # must begin iteration
 
     def advance(self):
         """Iterates through the entire text string and keeps track of current 
@@ -22,8 +22,8 @@ class Lexer:
 
         try:
             self.current_char = next(self.text)
-        except StopIteration: # standard end of iteration
-            self.current_char = None
+        except StopIteration: 
+            self.current_char = None # standard end of iteration
 
     def generate_tokens(self):
         """ A generator that cycles through each charcter in the text 
@@ -62,16 +62,18 @@ class Lexer:
         Number and a value
         """
 
+        # initialize
         decimal_counter = 0
-        number_str = self.current_char #consider changing
-        self.advance()
+        number_str = "" 
 
+        # None type check must exist because str cannot be compared with None
         while self.current_char is not None and \
             (self.current_char == "." or self.current_char in DIGITS):
+            # Ensure only one decimal exists
             if self.current_char == ".":
                 decimal_counter += 1
                 if decimal_counter > 1:
-                    raise Exception(f"Syntax Error: Too many decimal points")
+                    raise Exception(f"Syntax Error: Too many decimal points in {number_str}.")
 
             number_str += self.current_char
             self.advance()
