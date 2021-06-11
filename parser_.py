@@ -76,23 +76,36 @@ class Parser:
         return result
 
     def factor(self):
-        """The factor rule takes in a number token, moves to the next
-        token, and returns a number node of the first token. If it 
+        """The factor rule takes in a token and returns the appropriate
+        node. For a number token, it moves to the next token, and 
+        returns a number node with the value of the first token. If it 
         encounters a + or - token, it calls itself to act as a unary
-        operator.
+        operator and returns a unary node. If it encounters a (, it 
+        calls the experssion function to get an expression node.
         """
 
         token = self.current_token
 
-        if token.type == "NUMBER":
-            self.advance() # change current token
+        if token.type == "LPAREN":
+            self.advance() # skip past ( token
+            result = self.expr() # find the whole expression
+
+            if self.current_token.type != "RPAREN":
+                self.raise_error()
+
+            self.advance() # skip past ) token
+            return result
+        
+        elif token.type == "NUMBER":
+            self.advance() # move to next token (operator)
             return NumberNode(token.value)
+        
         elif token.type == "PLUS":
-            self.advance() # change current token
+            self.advance() # skip past operator token
             # call factor function again to act as unary operator
             return PlusNode(self.factor()) 
         elif token.type == "MINUS":
-            self.advance() # change current token
+            self.advance() # skip past operator token
             # call factor function again to act as unary operator
             return MinusNode(self.factor())
 
