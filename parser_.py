@@ -57,11 +57,11 @@ class Parser:
 
     def term(self):
         """The term rule considers the * and / operations. It looks 
-        through all * and / tokens, and keeps  adding * or / nodes to 
+        through all * and / tokens, and keeps adding * or / nodes to 
         the term. It returns the final term with all the recursive nodes.
         """
 
-        result = self.factor() # get first half of term
+        result = self.exp() # get first half of term
 
         # loop through all * or / tokens
         while self.current_token is not None and \
@@ -72,6 +72,23 @@ class Parser:
             elif self.current_token.type == "DIVIDE":
                 self.advance() # skip past / token
                 result = DivideNode(result, self.term())
+
+        return result
+
+    def exp(self):
+        """The exp rule considers the ^ operation. It looks 
+        through all ^ tokens, and keeps adding ^ nodes to 
+        the term. It returns the final term with all the recursive nodes.
+        """
+
+        result = self.factor() # get first half of term
+
+        # loop through all * or / tokens
+        while self.current_token is not None and \
+            self.current_token.type == "POWER":
+            if self.current_token.type == "POWER":
+                self.advance() # skip past ^ token
+                result = PowerNode(result, self.term())
 
         return result
 

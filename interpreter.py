@@ -1,6 +1,7 @@
 from nodes import *
 from values import *
 
+
 class Interpreter:
     """Takes in a root node of a tree and processes that tree to return
     a number."""
@@ -48,3 +49,8 @@ class Interpreter:
 
     def visit_MinusNode(self, node):
         return RealNumber(-self.visit(node.node).value)
+
+    def visit_PowerNode(self, node):
+        node_a_result = self.visit(node.node_a).value 
+        node_b_result = self.visit(node.node_b).value 
+        return RealNumber(node_a_result ** node_b_result)

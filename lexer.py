@@ -4,11 +4,12 @@ from tokens import Token
 WHITESPACE = ' \t\n'
 DIGITS = '0123456789'
 TOKEN_TYPE_DICT = {"+" : "PLUS", 
-                    "-": "MINUS", 
-                    "*": "MULTIPLY", 
-                    "/" : "DIVIDE", 
-                    "(" : "LPAREN", 
-                    ")": "RPAREN"
+                   "-": "MINUS", 
+                   "*": "MULTIPLY", 
+                   "/" : "DIVIDE", 
+                   "(" : "LPAREN", 
+                   ")": "RPAREN",
+                   "^": "POWER"
                     }
 
 class Lexer:
