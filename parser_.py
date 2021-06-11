@@ -4,7 +4,7 @@ from nodes import *
 class Parser:
     def __init__(self, tokens):
         self.tokens = iter(tokens)
-        self.advance() # Need advance to start going through the list
+        self.advance() # Need advance to reach the first token
 
     def raise_error():
         raise Exception("Invalid Syntax")
@@ -47,10 +47,10 @@ class Parser:
         while self.current_token is not None and \
             self.current_token.type in ("PLUS", "MINUS"):
             if self.current_token.type == "PLUS":
-                self.advance() # change current token
+                self.advance() # skip past + token
                 result = AddNode(result, self.term())
             elif self.current_token.type == "MINUS":
-                self.advance() # change current token
+                self.advance() # skip past - token
                 result = SubtractNode(result, self.term())
 
         return result
@@ -67,10 +67,10 @@ class Parser:
         while self.current_token is not None and \
             self.current_token.type in ("MULTIPLY", "DIVIDE"):
             if self.current_token.type == "MULTIPLY":
-                self.advance() # change current token
+                self.advance() # skip past * token
                 result = MultiplyNode(result, self.term())
             elif self.current_token.type == "DIVIDE":
-                self.advance() # change current token
+                self.advance() # skip past / token
                 result = DivideNode(result, self.term())
 
         return result
@@ -101,11 +101,11 @@ class Parser:
             return NumberNode(token.value)
         
         elif token.type == "PLUS":
-            self.advance() # skip past operator token
+            self.advance() # skip past + token
             # call factor function again to act as unary operator
             return PlusNode(self.factor()) 
         elif token.type == "MINUS":
-            self.advance() # skip past operator token
+            self.advance() # skip past - token
             # call factor function again to act as unary operator
             return MinusNode(self.factor())
 
