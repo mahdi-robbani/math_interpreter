@@ -36,10 +36,10 @@ class Parser:
         return result
 
     def expr(self):
-        """The expression rule considers the add and subtract operations.
-        It looks through all add and subtract tokens, and keeps 
-        adding add or subtract nodes to the term. It returns the 
-        final term with all the recursive nodes.
+        """The expression rule considers the + and - operations. It 
+        looks through all + and - tokens, and keeps  adding + or - nodes
+        to the term. It returns the final term with all the recursive 
+        nodes.
         """
         result = self.term() # get first half of expression
 
@@ -56,10 +56,9 @@ class Parser:
         return result
 
     def term(self):
-        """The term rule considers the multiply and divide operations.
-        It looks through all multiply and divide tokens, and keeps 
-        adding multiply or divide nodes to the term. It returns the 
-        final term with all the recursive nodes.
+        """The term rule considers the * and / operations. It looks 
+        through all * and / tokens, and keeps  adding * or / nodes to 
+        the term. It returns the final term with all the recursive nodes.
         """
 
         result = self.factor() # get first half of term
@@ -78,7 +77,9 @@ class Parser:
 
     def factor(self):
         """The factor rule takes in a number token, moves to the next
-        token, and returns a number node of the first token.
+        token, and returns a number node of the first token. If it 
+        encounters a + or - token, it calls itself to act as a unary
+        operator.
         """
 
         token = self.current_token
@@ -86,6 +87,14 @@ class Parser:
         if token.type == "NUMBER":
             self.advance() # change current token
             return NumberNode(token.value)
+        elif token.type == "PLUS":
+            self.advance() # change current token
+            # call factor function again to act as unary operator
+            return PlusNode(self.factor()) 
+        elif token.type == "MINUS":
+            self.advance() # change current token
+            # call factor function again to act as unary operator
+            return MinusNode(self.factor())
 
         # Not a number token so most likely error since we are supposed 
         # to alternate between numbers and operators
