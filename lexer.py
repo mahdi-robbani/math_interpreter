@@ -3,7 +3,7 @@ from tokens import Token
 # constants
 WHITESPACE = ' \t\n'
 DIGITS = '0123456789'
-TOKENT_TYPE_DICT = {"+" : "PLUS", 
+TOKEN_TYPE_DICT = {"+" : "PLUS", 
                     "-": "MINUS", 
                     "*": "MULTIPLY", 
                     "/" : "DIVIDE", 
@@ -41,11 +41,13 @@ class Lexer:
             # skips whitespaces
             if self.current_char in WHITESPACE: 
                 self.advance()
+            # get NUMBER token
             elif self.current_char == "." or self.current_char in DIGITS:
                 yield self.generate_number()
+            # Check return legal token or throw error
             else:
                 try:
-                    token_type = TOKENT_TYPE_DICT[self.current_char]
+                    token_type = TOKEN_TYPE_DICT[self.current_char]
                     yield Token(token_type)
                     self.advance()
                 except KeyError:
