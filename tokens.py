@@ -1,5 +1,17 @@
-#from enum import Enum
+from enum import Enum
 from dataclasses import dataclass
+
+class TokenType(Enum):
+    """Class for the allowed token types"""
+
+    NUMBER      = 0
+    PLUS        = 1
+    MINUS       = 2
+    MULTIPLY    = 3
+    DIVIDE      = 4
+    LPAREN      = 5
+    RPAREN      = 6
+    POWER       = 7
 
 @dataclass
 class Token:
@@ -9,7 +21,8 @@ class Token:
     __init__ and __repr__ etc.
     """
 
-    type: str # we are initilizing using fields, part of @dataclass
+    # we are initilizing using fields, part of @dataclass
+    type: TokenType # Only allow the enumerated token types
     value: any = None 
 
     def __repr__(self) -> str:

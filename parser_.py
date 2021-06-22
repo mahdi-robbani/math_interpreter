@@ -1,4 +1,4 @@
-from lexer import TOKEN_TYPE_DICT
+from tokens import TokenType
 from nodes import *
 
 class Parser:
@@ -45,11 +45,11 @@ class Parser:
 
         # loop through all + or - tokens
         while self.current_token is not None and \
-            self.current_token.type in ("PLUS", "MINUS"):
-            if self.current_token.type == "PLUS":
+            self.current_token.type in (TokenType.PLUS, TokenType.MINUS):
+            if self.current_token.type == TokenType.PLUS:
                 self.advance() # skip past + token
                 result = AddNode(result, self.term())
-            elif self.current_token.type == "MINUS":
+            elif self.current_token.type == TokenType.MINUS:
                 self.advance() # skip past - token
                 result = SubtractNode(result, self.term())
 
@@ -65,11 +65,11 @@ class Parser:
 
         # loop through all * or / tokens
         while self.current_token is not None and \
-            self.current_token.type in ("MULTIPLY", "DIVIDE"):
-            if self.current_token.type == "MULTIPLY":
+            self.current_token.type in (TokenType.MULTIPLY, TokenType.DIVIDE):
+            if self.current_token.type == TokenType.MULTIPLY:
                 self.advance() # skip past * token
                 result = MultiplyNode(result, self.term())
-            elif self.current_token.type == "DIVIDE":
+            elif self.current_token.type == TokenType.DIVIDE:
                 self.advance() # skip past / token
                 result = DivideNode(result, self.term())
 
@@ -85,8 +85,8 @@ class Parser:
 
         # loop through all * or / tokens
         while self.current_token is not None and \
-            self.current_token.type == "POWER":
-            if self.current_token.type == "POWER":
+            self.current_token.type == TokenType.POWER:
+            if self.current_token.type == TokenType.POWER:
                 self.advance() # skip past ^ token
                 result = PowerNode(result, self.term())
 
@@ -103,25 +103,25 @@ class Parser:
 
         token = self.current_token
 
-        if token.type == "LPAREN":
+        if token.type == TokenType.LPAREN:
             self.advance() # skip past ( token
             result = self.expr() # find the whole expression
 
-            if self.current_token.type != "RPAREN":
+            if self.current_token.type != TokenType.RPAREN:
                 self.raise_error()
 
             self.advance() # skip past ) token
             return result
         
-        elif token.type == "NUMBER":
+        elif token.type == TokenType.NUMBER:
             self.advance() # move to next token (operator)
             return NumberNode(token.value)
         
-        elif token.type == "PLUS":
+        elif token.type == TokenType.PLUS:
             self.advance() # skip past + token
             # call factor function again to act as unary operator
             return PlusNode(self.factor()) 
-        elif token.type == "MINUS":
+        elif token.type == TokenType.MINUS:
             self.advance() # skip past - token
             # call factor function again to act as unary operator
             return MinusNode(self.factor())

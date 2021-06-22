@@ -1,16 +1,16 @@
-from tokens import Token
+from tokens import TokenType, Token
 
 # constants
 WHITESPACE = ' \t\n'
 DIGITS = '0123456789'
-TOKEN_TYPE_DICT = {"+" : "PLUS", 
-                   "-": "MINUS", 
-                   "*": "MULTIPLY", 
-                   "/" : "DIVIDE", 
-                   "(" : "LPAREN", 
-                   ")": "RPAREN",
-                   "^": "POWER"
-                    }
+TOKEN_TYPE_DICT = {"+" : TokenType.PLUS, 
+                   "-" : TokenType.MINUS, 
+                   "*" : TokenType.MULTIPLY, 
+                   "/" : TokenType.DIVIDE, 
+                   "(" : TokenType.LPAREN, 
+                   ")" : TokenType.RPAREN,
+                   "^" : TokenType.POWER
+                  }
 
 class Lexer:
     """Class used for converting text to a list of tokens"""
@@ -82,5 +82,5 @@ class Lexer:
         if number_str.endswith('.'):
             number_str += '0'
         
-        return Token("NUMBER", float(number_str))
+        return Token(TokenType.NUMBER, float(number_str))
 
