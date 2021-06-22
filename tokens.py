@@ -27,4 +27,4 @@ class Token:
 
     def __repr__(self) -> str:
         # Print name+value if value exists
-        return self.type + (f":{self.value}" if self.value is not None else "")
+        return self.type.name + (f":{self.value}" if self.value is not None else "")
