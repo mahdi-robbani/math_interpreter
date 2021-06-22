@@ -1,6 +1,6 @@
 # Simple Math Interpreter
 
-A simple math interpreter coded in Python which can evaluate simple math calculations. It can currently perform the following operations:
+A math interpreter coded in Python which can evaluate simple math calculations. It can currently perform the following operations:
 - Add
 - Subtract
 - Multiply
