@@ -54,7 +54,7 @@ class MinusNode:
         return f"(-{self.node})"
 
 @dataclass
-class PowerNode:
+class ExponentNode:
     node_a: any
     node_b: any
     

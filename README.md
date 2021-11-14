@@ -41,10 +41,9 @@ The interpeter could be swapped out for a compiler which generates machine-reada
 Requirements:
  - [Python3](https://www.python.org/downloads/) ^3.9
 
-Run: `$PYTHON3 main.py` where `$PYTHON3` should be replaced with your Python3 binary, often `python` or `python3` will do.
+Run: 
+`python src/main.py` 
 
 Unit testing:
 
- - `$PYTHON3 tests/lexer_test.py`
- - `$PYTHON3 tests/parser_test.py`
- - `$PYTHON3 tests/interpreter_test.py`
+`python -m unittest`

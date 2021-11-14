@@ -23,7 +23,7 @@ class TestInterpreter(unittest.TestCase):
         value = Interpreter().visit(DivideNode(NumberNode(3), NumberNode(7)))
         self.assertAlmostEqual(value.value, 0.42857, 5)
 
-        value = Interpreter().visit(PowerNode(NumberNode(3), NumberNode(7)))
+        value = Interpreter().visit(ExponentNode(NumberNode(3), NumberNode(7)))
         self.assertEqual(value, RealNumber(2187))
 
         # Ensure code raises exception
@@ -35,7 +35,7 @@ class TestInterpreter(unittest.TestCase):
         tree = SubtractNode(
             AddNode(
                 NumberNode(12),
-                PowerNode(
+                ExponentNode(
                     NumberNode(2),
                     DivideNode(
                         NumberNode(8),

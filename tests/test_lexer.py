@@ -36,7 +36,7 @@ class TestLexer(unittest.TestCase):
                   Token(TokenType.MINUS),
                   Token(TokenType.MULTIPLY),
                   Token(TokenType.DIVIDE),
-                  Token(TokenType.POWER)]
+                  Token(TokenType.EXPONENT)]
         self.assertEqual(tokens, answer)
 
     def test_parens(self):
@@ -54,7 +54,7 @@ class TestLexer(unittest.TestCase):
         answer = [Token(TokenType.NUMBER, 12),
                   Token(TokenType.PLUS),
                   Token(TokenType.NUMBER, 2),
-                  Token(TokenType.POWER),
+                  Token(TokenType.EXPONENT),
                   Token(TokenType.LPAREN),
                   Token(TokenType.NUMBER, 8),
                   Token(TokenType.DIVIDE),

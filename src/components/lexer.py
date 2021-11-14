@@ -9,7 +9,7 @@ TOKEN_TYPE_DICT = {"+" : TokenType.PLUS,
                    "/" : TokenType.DIVIDE, 
                    "(" : TokenType.LPAREN, 
                    ")" : TokenType.RPAREN,
-                   "^" : TokenType.POWER
+                   "^" : TokenType.EXPONENT
                   }
 
 class Lexer:

@@ -52,11 +52,11 @@ class TestParser(unittest.TestCase):
         self.assertEqual(nodes, DivideNode(NumberNode(12.4), NumberNode(0.98)))
         
         tokens = [Token(TokenType.NUMBER, 12.4), 
-                  Token(TokenType.POWER), 
+                  Token(TokenType.EXPONENT), 
                   Token(TokenType.NUMBER, 0.98)]
         
         nodes = Parser(tokens).parse()
-        self.assertEqual(nodes, PowerNode(NumberNode(12.4), NumberNode(0.98)))
+        self.assertEqual(nodes, ExponentNode(NumberNode(12.4), NumberNode(0.98)))
 
 
     def test_full_expression(self):
@@ -66,7 +66,7 @@ class TestParser(unittest.TestCase):
         tokens = [Token(TokenType.NUMBER, 12),
                   Token(TokenType.PLUS),
                   Token(TokenType.NUMBER, 2),
-                  Token(TokenType.POWER),
+                  Token(TokenType.EXPONENT),
                   Token(TokenType.LPAREN),
                   Token(TokenType.NUMBER, 8),
                   Token(TokenType.DIVIDE),
@@ -80,7 +80,7 @@ class TestParser(unittest.TestCase):
         answer = SubtractNode(
             AddNode(
                 NumberNode(12),
-                PowerNode(
+                ExponentNode(
                     NumberNode(2),
                     DivideNode(
                         NumberNode(8),

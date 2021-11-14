@@ -85,10 +85,10 @@ class Parser:
 
         # loop through all * or / tokens
         while self.current_token is not None and \
-            self.current_token.type == TokenType.POWER:
-            if self.current_token.type == TokenType.POWER:
+            self.current_token.type == TokenType.EXPONENT:
+            if self.current_token.type == TokenType.EXPONENT:
                 self.advance() # skip past ^ token
-                result = PowerNode(result, self.term())
+                result = ExponentNode(result, self.term())
 
         return result
 

@@ -50,7 +50,7 @@ class Interpreter:
     def visit_MinusNode(self, node):
         return RealNumber(-self.visit(node.node).value)
 
-    def visit_PowerNode(self, node):
+    def visit_ExponentNode(self, node):
         node_a_result = self.visit(node.node_a).value 
         node_b_result = self.visit(node.node_b).value 
         return RealNumber(node_a_result ** node_b_result)
