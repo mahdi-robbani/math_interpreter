@@ -12,6 +12,7 @@ class TokenType(Enum):
     LPAREN      = 5
     RPAREN      = 6
     EXPONENT    = 7
+    MODULO      = 8
 
 @dataclass
 class Token:

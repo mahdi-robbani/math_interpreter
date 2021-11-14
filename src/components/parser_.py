@@ -56,22 +56,26 @@ class Parser:
         return result
 
     def term(self):
-        """The term rule considers the * and / operations. It looks 
-        through all * and / tokens, and keeps adding * or / nodes to 
-        the term. It returns the final term with all the recursive nodes.
+        """The term rule considers the *, / and % operations. It looks 
+        through all *, / and % tokens, and keeps adding *, / and % nodes
+        to the term. It returns the final term with all the recursive 
+        nodes.
         """
 
         result = self.exp() # get first half of term
 
         # loop through all * or / tokens
         while self.current_token is not None and \
-            self.current_token.type in (TokenType.MULTIPLY, TokenType.DIVIDE):
+            self.current_token.type in (TokenType.MULTIPLY, TokenType.DIVIDE, TokenType.MODULO):
             if self.current_token.type == TokenType.MULTIPLY:
                 self.advance() # skip past * token
                 result = MultiplyNode(result, self.term())
             elif self.current_token.type == TokenType.DIVIDE:
                 self.advance() # skip past / token
                 result = DivideNode(result, self.term())
+            elif self.current_token.type == TokenType.MODULO:
+                self.advance() # skip past % token
+                result = ModuloNode(result, self.term())
 
         return result
 

@@ -54,3 +54,11 @@ class Interpreter:
         node_a_result = self.visit(node.node_a).value 
         node_b_result = self.visit(node.node_b).value 
         return RealNumber(node_a_result ** node_b_result)
+
+    def visit_ModuloNode(self, node):
+        try:
+            node_a_result = self.visit(node.node_a).value 
+            node_b_result = self.visit(node.node_b).value 
+            return RealNumber(node_a_result % node_b_result)
+        except:
+            raise Exception("Runtime math error")

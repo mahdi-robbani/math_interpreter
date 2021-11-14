@@ -5,7 +5,8 @@ A math interpreter coded in Python which can evaluate simple math calculations. 
 - Subtract
 - Multiply
 - Divide
-- Power
+- Exponent
+- Modulo
 
 The program works using the following procedure:
 - Converts the user input into tokens using the lexer
