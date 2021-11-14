@@ -45,6 +45,6 @@ Run: `$PYTHON3 main.py` where `$PYTHON3` should be replaced with your Python3 bi
 
 Unit testing:
 
- - `$PYTHON3 lexer_test.py`
- - `$PYTHON3 parser_test.py`
- - `$PYTHON3 interpreter_test.py`
+ - `$PYTHON3 tests/lexer_test.py`
+ - `$PYTHON3 tests/parser_test.py`
+ - `$PYTHON3 tests/interpreter_test.py`
