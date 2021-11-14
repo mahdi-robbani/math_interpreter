@@ -1,7 +1,7 @@
 import unittest
-from nodes import *
-from interpreter import Interpreter
-from values import RealNumber
+from src.components.types.nodes import *
+from src.components.interpreter import Interpreter
+from src.components.types.values import RealNumber
 
 class TestInterpreter(unittest.TestCase):
     """Contains all the tests for the Interpreter class"""

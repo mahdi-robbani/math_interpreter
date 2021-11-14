@@ -1,7 +1,7 @@
 import unittest
-from tokens import TokenType, Token
-from parser_ import Parser
-from nodes import *
+from src.components.types.tokens import TokenType, Token
+from src.components.parser_ import Parser
+from src.components.types.nodes import *
 
 class TestParser(unittest.TestCase):
     """Contains all the tests for the Parser class"""

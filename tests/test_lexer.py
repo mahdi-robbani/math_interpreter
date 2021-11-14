@@ -1,6 +1,6 @@
 import unittest
-from tokens import TokenType, Token
-from lexer import Lexer
+from src.components.types.tokens import TokenType, Token
+from src.components.lexer import Lexer
 
 class TestLexer(unittest.TestCase):
     """Contains all the tests for the Lexer class"""
