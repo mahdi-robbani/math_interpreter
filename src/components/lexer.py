@@ -1,4 +1,4 @@
-from tokens import TokenType, Token
+from .types.tokens import TokenType, Token
 
 # constants
 WHITESPACE = ' \t\n'

@@ -1,5 +1,5 @@
-from nodes import *
-from values import *
+from .types.nodes import *
+from .types.values import *
 
 
 class Interpreter:

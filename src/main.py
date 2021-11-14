@@ -1,6 +1,6 @@
-from lexer import Lexer
-from parser_ import Parser
-from interpreter import Interpreter
+from components.lexer import Lexer
+from components.parser_ import Parser
+from components.interpreter import Interpreter
 
 while True:
     try:
