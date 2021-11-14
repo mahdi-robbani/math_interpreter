@@ -26,10 +26,17 @@ class TestInterpreter(unittest.TestCase):
         value = Interpreter().visit(ExponentNode(NumberNode(3), NumberNode(7)))
         self.assertEqual(value, RealNumber(2187))
 
+        value = Interpreter().visit(ModuloNode(NumberNode(3), NumberNode(7)))
+        self.assertEqual(value, RealNumber(3))
+
         # Ensure code raises exception
         with self.assertRaises(Exception):
-            # Divide by Zero
+            # Divide by zero
             Interpreter.visit(DivideNode(NumberNode(1), NumberNode(0)))
+
+        with self.assertRaises(Exception):
+            # Divide by zero
+            Interpreter.visit(ModuloNode(NumberNode(1), NumberNode(0)))
 
     def test_full_expression(self):
         tree = SubtractNode(
@@ -45,7 +52,11 @@ class TestInterpreter(unittest.TestCase):
             ),
             MultiplyNode(
                 NumberNode(5),
-                NumberNode(3)
+                ModuloNode(
+                    NumberNode(7),
+                    NumberNode(4)
+                )
+                #NumberNode(3)
             )
         )
         result = Interpreter().visit(tree)

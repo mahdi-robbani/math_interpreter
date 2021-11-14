@@ -31,12 +31,13 @@ class TestLexer(unittest.TestCase):
     def test_operator(self):
         """Ensure operators return corrent operator token"""
 
-        tokens = list(Lexer("+-*/^").generate_tokens())
+        tokens = list(Lexer("+-*/^%").generate_tokens())
         answer = [Token(TokenType.PLUS),
                   Token(TokenType.MINUS),
                   Token(TokenType.MULTIPLY),
                   Token(TokenType.DIVIDE),
-                  Token(TokenType.EXPONENT)]
+                  Token(TokenType.EXPONENT),
+                  Token(TokenType.MODULO)]
         self.assertEqual(tokens, answer)
 
     def test_parens(self):
@@ -50,7 +51,7 @@ class TestLexer(unittest.TestCase):
     def test_all(self):
         """Test all token types"""
 
-        tokens = list(Lexer("12 + 2^(8/4) - 5 * 3").generate_tokens())
+        tokens = list(Lexer("12 + 2^(8/4) - 5 * (7%4)").generate_tokens())
         answer = [Token(TokenType.NUMBER, 12),
                   Token(TokenType.PLUS),
                   Token(TokenType.NUMBER, 2),
@@ -63,7 +64,12 @@ class TestLexer(unittest.TestCase):
                   Token(TokenType.MINUS),
                   Token(TokenType.NUMBER, 5),
                   Token(TokenType.MULTIPLY),
-                  Token(TokenType.NUMBER, 3)]
+                  Token(TokenType.LPAREN),
+                  Token(TokenType.NUMBER, 7),
+                  Token(TokenType.MODULO),
+                  Token(TokenType.NUMBER, 4),
+                  Token(TokenType.RPAREN)]
+                  #Token(TokenType.NUMBER, 3)]
         self.assertEqual(tokens, answer)
 
 if __name__ == '__main__':
